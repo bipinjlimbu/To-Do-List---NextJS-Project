@@ -1,7 +1,5 @@
-import { dummyData } from "@/lib/DummyData";
-
-export default function Home() {
-  const todos = dummyData;
+export default async function Home() {
+  const todos = await fetch("http://localhost:3000/api/todos").then((res) => res.json());
 
   return (
     <main className="min-h-[calc(100vh-130px)] bg-slate-50 text-slate-800 py-12 px-4 sm:px-6 lg:px-8">
@@ -25,7 +23,7 @@ export default function Home() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 text-sm">
-              {todos.map((todo) => (
+              {todos.map((todo: TypeToDo) => (
                 <tr
                   key={todo.id}
                   className={`group transition-colors duration-150 ${todo.completed ? "bg-slate-50/40 text-slate-400" : "bg-white text-slate-700 hover:bg-slate-50/50"
@@ -47,7 +45,7 @@ export default function Home() {
 
                   <td className="py-4 px-6 font-medium">
                     <span className={todo.completed ? "line-through text-slate-400" : "text-slate-800"}>
-                      {todo.text}
+                      {todo.title}
                     </span>
                   </td>
 
@@ -89,17 +87,6 @@ export default function Home() {
             </tbody>
           </table>
         </div>
-
-        <div className="p-4 bg-slate-50/50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 sm:px-6">
-          <div>
-            Showing <span className="font-semibold text-slate-700">{todos.length}</span> tasks
-          </div>
-          <div className="flex space-x-4">
-            <span>Done: {todos.filter(t => t.completed).length}</span>
-            <span>Active: {todos.filter(t => !t.completed).length}</span>
-          </div>
-        </div>
-
       </div>
     </main>
   );
