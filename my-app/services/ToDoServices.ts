@@ -20,6 +20,16 @@ export async function addTodo(title: string) {
     }
 }
 
+export async function getTodoById(id: number) {
+    try {
+        const [data] = await db.query('SELECT * FROM todos WHERE id = ?', [id]);
+        return data;
+    } catch (error) {
+        console.error('Error fetching todo by ID:', error);
+        throw error;
+    }
+}
+
 export async function updateTodo(id: number, updatedFields: TypeToDo) {
     try {
         const [data] = await db.query('UPDATE todos SET title = ?, completed = ? WHERE id = ?', [
