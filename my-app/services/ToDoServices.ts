@@ -44,6 +44,16 @@ export async function updateTodo(id: number, updatedFields: TypeToDo) {
     }
 }
 
+export async function statusUpdate(id: number, completed: boolean) {
+    try {
+        const [data] = await db.query('UPDATE todos SET completed = ? WHERE id = ?', [completed, id]);
+        return data;
+    } catch (error) {
+        console.error('Error updating todo status:', error);
+        throw error;
+    }
+}
+
 export async function deleteTodo(id: number) {
     try {
         const [data] = await db.query('DELETE FROM todos WHERE id = ?', [id]);

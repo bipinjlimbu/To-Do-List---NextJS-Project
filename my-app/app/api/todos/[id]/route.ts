@@ -1,4 +1,4 @@
-import { getTodoById, updateTodo, deleteTodo } from "@/services/ToDoServices";
+import { getTodoById, updateTodo, statusUpdate, deleteTodo } from "@/services/ToDoServices";
 
 export async function GET(request: Request, ctx: RouteContext<"/api/todos/[id]">) {
     const { id } = await ctx.params;
@@ -19,6 +19,18 @@ export async function PUT(request: Request, ctx: RouteContext<"/api/todos/[id]">
         return Response.json(updatedTodo);
     } catch (error) {
         return Response.json({ error: "Failed to update todo" }, { status: 500 });
+    }
+}
+
+export async function PATCH(request: Request, ctx: RouteContext<"/api/todos/[id]">) {
+    const { id } = await ctx.params;
+    const { completed } = await request.json();
+
+    try {
+        const updatedTodo = await statusUpdate(Number(id), completed);
+        return Response.json(updatedTodo);
+    } catch (error) {
+        return Response.json({ error: "Failed to update todo status" }, { status: 500 });
     }
 }
 
