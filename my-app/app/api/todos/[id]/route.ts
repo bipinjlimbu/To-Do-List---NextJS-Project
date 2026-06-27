@@ -21,3 +21,13 @@ export async function PUT(request: Request, ctx: RouteContext<"/api/todos/[id]">
         return Response.json({ error: "Failed to update todo" }, { status: 500 });
     }
 }
+
+export async function DELETE(request: Request, ctx: RouteContext<"/api/todos/[id]">) {
+    const { id } = await ctx.params;
+    try {
+        await deleteTodo(Number(id));
+        return Response.json({ message: "Todo deleted successfully" });
+    } catch (error) {
+        return Response.json({ error: "Failed to delete todo" }, { status: 500 });
+    }
+}
