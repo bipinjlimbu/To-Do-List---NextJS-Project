@@ -43,3 +43,13 @@ export async function updateTodo(id: number, updatedFields: TypeToDo) {
         throw error;
     }
 }
+
+export async function deleteTodo(id: number) {
+    try {
+        const [data] = await db.query('DELETE FROM todos WHERE id = ?', [id]);
+        return data;
+    } catch (error) {
+        console.error('Error deleting todo:', error);
+        throw error;
+    }
+}
