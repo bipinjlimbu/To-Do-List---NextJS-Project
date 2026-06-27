@@ -1,5 +1,6 @@
 import Link from "next/link";
 import DeleteButton from "@/components/DeleteButton";
+import PatchStatus from "@/components/PatchStatus";
 
 export default async function Home() {
   const todos: TypeToDo[] = await fetch("http://localhost:3000/api/todos",).then((res) => res.json());
@@ -34,15 +35,7 @@ export default async function Home() {
                 >
                   <td className="py-4 px-6 text-center">
                     <div className="inline-flex items-center justify-center">
-                      {todo.completed ? (
-                        <svg className="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      ) : (
-                        <svg className="w-5 h-5 text-slate-300 group-hover:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                          <circle cx="12" cy="12" r="10" />
-                        </svg>
-                      )}
+                      <PatchStatus todo={todo} />
                     </div>
                   </td>
 
