@@ -11,7 +11,7 @@ export default function Navbar() {
                     <span className="font-bold text-xl text-slate-900 tracking-tight">ToDo App</span>
                 </Link>
                 <div className="flex items-center space-x-1">
-                    <Link href="/" className="px-3 py-2 text-sm font-medium text-indigo-600 bg-indigo-50 rounded-lg">
+                    <Link href="/add/" className="px-3 py-2 text-sm font-medium text-indigo-600 bg-indigo-50 rounded-lg">
                         Add Task
                     </Link>
                 </div>
